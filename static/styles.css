@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.main-section {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.preset-section {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.input-section, .output-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+}
+#output {
+    border: 1px solid #ddd;
+    padding: 10px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#output > * {
+    max-width: 100%;
+}
+button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+#notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    display: none;
+    transition: opacity 0.5s;
+}
+.preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.preset-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.preset-button:hover {
+    background-color: #e9e9e9;
+}
+.preset-button img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+.ocr-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* 使其与上方模块保持间距 */
+}
+.ocr-section p {
+    font-size: 14px;
+    color: #666; /* 文本颜色与其他模块保持一致 */
+    margin-top: 10px;
+}
+.watermark {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5); /* 半透明灰色 */
+    font-style: italic;
+    z-index: 1000;
+    pointer-events: none; /* 确保水印不会干扰页面其他元素的交互 */
+}

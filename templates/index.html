@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX 公式编辑器</title>
+    <link rel="icon" href="../static/icons/latex-icon-32x32.png" sizes="32x32">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">  <!-- 动态引用 CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-svg.js"></script>
+</head>
+<body>
+    <h1>LaTeX 公式编辑器</h1>
+    <div class="container">
+        <!-- 左侧主要内容区 -->
+        <div class="main-section">
+            <div class="input-section">
+                <h2>LaTeX 输入</h2>
+                <textarea id="latex-input" placeholder="在这里输入您的LaTeX公式"></textarea>
+            </div>
+            <div class="output-section">
+                <h2>渲染结果</h2>
+                <div id="output"></div>
+                <div>
+                    <label for="resolution">分辨率 (dpi):</label>
+                    <input type="number" id="resolution" value="150" min="72" max="600" step="1">
+                </div>
+                <button onclick="downloadSVG()">下载 SVG</button>
+                <button onclick="downloadPNG()">下载 PNG</button>
+                <button onclick="copySVG()">复制 SVG</button>
+                <button onclick="copyPNG()">复制 PNG</button>
+            </div>
+
+            <!-- 图片上传OCR模块 -->
+            <div class="ocr-section input-section">
+                <h2>上传图片进行LaTeX OCR</h2>
+                <form id="uploadForm">
+                    <input type="file" id="fileInput" name="file" accept="image/png, image/jpeg" required>
+                    <button type="submit">上传并识别</button>
+                </form>
+                <div id="ocr-result"></div>
+                <!-- 添加提示文字 -->
+                <p>使用 <strong>Ctrl + V</strong> 进行粘贴同样可以进行公式OCR识别。</p>
+            </div>
+
+        </div>
+
+        <!-- 右侧预设公式区 -->
+        <div class="preset-section">
+            <h2>预设公式</h2>
+            <div id="preset-buttons" class="preset-buttons">
+                <!-- 预设按钮将在这里动态添加 -->
+            </div>
+        </div>
+    </div>
+    <div id="notification"></div>
+    <div class="watermark">Latex OCR - powered By SimpleTex. Jason Lee, Sep, 2024.</div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- 动态引用 JavaScript -->
+</body>
+</html>
