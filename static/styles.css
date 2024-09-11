@@ -4,6 +4,9 @@ body {
     margin: 0 auto;
     padding: 20px;
     background-color: #f0f0f0;
+    background-image: url('../img/bg.jpg');
+    background-repeat: repeat; /* 背景平铺 */
+    background-size: auto; /* 确保背景图片以原始大小显示 */
 }
 .container {
     display: flex;
