@@ -16,7 +16,7 @@ function renderEquation() {
     mathElement.style.width = '100%';
     mathElement.style.display = 'flex';
     mathElement.style.justifyContent = 'center';
-    mathElement.innerHTML = '\\[' + input + '\\]';
+    mathElement.innerHTML = '\\[' + input.replace(/\\/g, '\\\\') + '\\]';
     output.appendChild(mathElement);
     MathJax.typesetPromise([mathElement]).then(() => {
         console.log('Equation rendered');
