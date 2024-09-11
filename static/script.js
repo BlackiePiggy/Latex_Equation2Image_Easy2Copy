@@ -233,3 +233,17 @@ function uploadImageFromClipboard(file) {
         showNotification('OCR请求出错，请稍后再试。');
     });
 }
+
+// 在文件末尾添加以下代码
+window.addEventListener('load', function() {
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true
+        },
+        TeX: {
+            equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+        }
+    });
+});
