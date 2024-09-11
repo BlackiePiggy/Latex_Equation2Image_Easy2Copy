@@ -11,12 +11,16 @@ const presetFormulas = [
 
 function renderEquation() {
     const input = latexInput.value;
-    output.innerHTML = '';  // Clear previous content
+    const escapedInput = he.encode(input, {
+        useNamedReferences: true,
+        allowUnsafeSymbols: false
+    });
+    output.innerHTML = '';  // 清空之前的内容
     const mathElement = document.createElement('div');
     mathElement.style.width = '100%';
     mathElement.style.display = 'flex';
     mathElement.style.justifyContent = 'center';
-    mathElement.innerHTML = '\\[' + input + '\\]';
+    mathElement.innerHTML = '\\[' + escapedInput + '\\]';
     output.appendChild(mathElement);
     MathJax.typesetPromise([mathElement]).then(() => {
         console.log('Equation rendered');
@@ -234,16 +238,3 @@ function uploadImageFromClipboard(file) {
     });
 }
 
-// 在文件末尾添加以下代码
-window.addEventListener('load', function() {
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            processEscapes: true
-        },
-        TeX: {
-            equationNumbers: { autoNumber: "AMS" },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
-        }
-    });
-});
