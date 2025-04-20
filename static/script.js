@@ -7,6 +7,8 @@ const presetFormulas = [
     { name: "求和", latex: "\\sum_{i=1}^n x_i" },
     { name: "积分", latex: "\\int_{a}^b f(x) dx" },
     { name: "多行括号", latex: "\\begin{cases} \n \n\\end{cases}" },
+    { name: "Array格式", latex: "\\begin{array}{c} \n \n\\end{array}" },
+    { name: "Align格式", latex: "\\begin{align} \n \n\\end{align}" },
 ];
 
 function renderEquation() {
