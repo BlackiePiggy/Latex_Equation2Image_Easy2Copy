@@ -228,15 +228,42 @@ function copyPNG() {
     img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
 }
 
+function extractLatexFromResponse(data) {
+    if (!data || typeof data !== 'object') return '';
+
+    const candidates = [
+        data?.res?.latex,
+        data?.result?.latex,
+        data?.data?.latex,
+        data?.latex
+    ];
+
+    for (const value of candidates) {
+        if (typeof value === 'string' && value.trim()) return value.trim();
+    }
+
+    return '';
+}
+
+function getOcrErrorMessage(data) {
+    const message = data?.msg || data?.message || data?.error || data?.detail;
+    return typeof message === 'string' && message.trim() ? message.trim() : '';
+}
+
 function handleOCRResponse(data) {
-    if (data.status && data.res && data.res.latex) {
-        latexInput.value = data.res.latex;
+    const latex = extractLatexFromResponse(data);
+    if (latex) {
+        latexInput.value = latex;
         renderEquation();
         ocrResult.textContent = '识别成功，已自动填入输入框。';
         showNotification('OCR 识别成功');
         return;
     }
-    ocrResult.textContent = '识别失败，请尝试更清晰的图片。';
+
+    const errorMessage = getOcrErrorMessage(data);
+    ocrResult.textContent = errorMessage
+        ? `识别失败：${errorMessage}`
+        : '识别失败，请尝试更清晰的图片。';
     showNotification('OCR 识别失败', 'error');
 }
 
@@ -249,8 +276,16 @@ function uploadImage(file) {
         method: 'POST',
         body: formData
     })
-        .then((response) => response.json())
-        .then((data) => handleOCRResponse(data))
+        .then(async (response) => {
+            const data = await response.json();
+            if (!response.ok) {
+                const errorMessage = getOcrErrorMessage(data) || `HTTP ${response.status}`;
+                ocrResult.textContent = `请求失败：${errorMessage}`;
+                showNotification('OCR 请求失败', 'error');
+                return;
+            }
+            handleOCRResponse(data);
+        })
         .catch(() => {
             ocrResult.textContent = '请求失败，请检查服务状态。';
             showNotification('OCR 请求失败', 'error');
