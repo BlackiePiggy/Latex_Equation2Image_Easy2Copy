@@ -1,59 +1,50 @@
 # Latex_Equation2Image_Easy2Copy
 
-LaTeX equation rendering + OCR (SimpleTex API), adapted for **Cloudflare Python Workers**.
-
-## Fast Path: Git Auto Deploy (Recommended)
-
-Use Cloudflare Workers Builds to connect this repo and auto-deploy on push.
-
-- Guide: `CLOUDFLARE_AUTO_DEPLOY.md`
+LaTeX equation rendering + OCR (SimpleTex API), now running on **Cloudflare Workers + Hono (TypeScript)**.
 
 ## Local Dev
 
-1. Install tools
+1. Install dependencies
 
 ```bash
-npm i -g wrangler@latest
-# install uv first: https://docs.astral.sh/uv/
-uv sync
+npm install
 ```
 
 2. Login Cloudflare
 
 ```bash
-wrangler login
+npx wrangler login
 ```
 
 3. Set secret
 
 ```bash
-wrangler secret put SIMPLETEX_UAT
+npx wrangler secret put SIMPLETEX_UAT
 ```
 
 4. Start local runtime
 
 ```bash
-uvx --from workers-py pywrangler dev
+npm run dev
 ```
 
 5. Open
 
 - `http://127.0.0.1:8787`
 
-## Manual Deploy
+## Deploy
 
 ```bash
-uvx --from workers-py pywrangler deploy
+npm run deploy
 ```
 
 ## Project Structure
 
-- `src/index.py`: Worker + FastAPI backend
-- `templates/index.html`: main page
-- `static/`: JS/CSS/icons
-- `wrangler.toml`: Worker config
-- `pyproject.toml`: Python dependencies
-- `package.json`: CI-friendly scripts for Cloudflare Builds
+- `src/index.ts`: Worker API (`/upload`) + asset fallback
+- `public/index.html`: main page
+- `public/static/`: JS/CSS/icons
+- `wrangler.toml`: Worker + assets config
+- `package.json`: dependencies and scripts
 
 ## Notes
 

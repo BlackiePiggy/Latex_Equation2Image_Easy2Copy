@@ -1,11 +1,16 @@
 {
   "name": "latex-equation2image-easy2copy",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
-    "cf:install": "curl -LsSf https://astral.sh/uv/install.sh | sh && $HOME/.local/bin/uv sync",
-    "cf:build": "$HOME/.local/bin/uv run pywrangler versions upload",
-    "cf:deploy": "$HOME/.local/bin/uv run pywrangler deploy"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "cf:install": "npm ci",
+    "cf:build": "wrangler versions upload",
+    "cf:deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "hono": "^4.9.6"
   },
   "devDependencies": {
     "wrangler": "^4.57.0"
